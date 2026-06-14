@@ -34,3 +34,65 @@ def get_total_records():
     with engine.connect() as connection:
         result = connection.execute(text("SELECT COUNT(*) FROM opportunities;"))
         return result.scalar()
+
+
+def check_duplicate(company_name, job_title, city, source_link):
+    engine = get_engine()
+    query = text("""
+        SELECT COUNT(*)
+        FROM opportunities
+        WHERE LOWER(company_name) = LOWER(:company_name)
+          AND LOWER(job_title) = LOWER(:job_title)
+          AND LOWER(COALESCE(city, '')) = LOWER(:city)
+          AND LOWER(COALESCE(source_link, '')) = LOWER(:source_link);
+    """)
+
+    with engine.connect() as connection:
+        result = connection.execute(query, {
+            "company_name": company_name.strip(),
+            "job_title": job_title.strip(),
+            "city": city.strip(),
+            "source_link": source_link.strip()
+        })
+        return result.scalar() > 0
+
+
+def insert_opportunity(data):
+    engine = get_engine()
+    query = text("""
+        INSERT INTO opportunities (
+            company_name,
+            job_title,
+            category,
+            city,
+            country,
+            work_mode,
+            required_skills,
+            salary_min,
+            salary_max,
+            currency,
+            experience_level,
+            application_deadline,
+            status,
+            source_link
+        )
+        VALUES (
+            :company_name,
+            :job_title,
+            :category,
+            :city,
+            :country,
+            :work_mode,
+            :required_skills,
+            :salary_min,
+            :salary_max,
+            :currency,
+            :experience_level,
+            :application_deadline,
+            :status,
+            :source_link
+        );
+    """)
+
+    with engine.begin() as connection:
+        connection.execute(query, data)
