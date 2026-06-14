@@ -135,3 +135,14 @@ def update_opportunity(opportunity_id, data):
 
     with engine.begin() as connection:
         connection.execute(query, data)
+
+
+def delete_opportunity(opportunity_id):
+    engine = get_engine()
+    query = text("""
+        DELETE FROM opportunities
+        WHERE opportunity_id = :opportunity_id;
+    """)
+
+    with engine.begin() as connection:
+        connection.execute(query, {"opportunity_id": opportunity_id})
