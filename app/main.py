@@ -1,4 +1,6 @@
 import streamlit as st
+from db import test_connection
+from queries import get_total_records
 
 st.set_page_config(
     page_title="Internship & Job Tracking Dashboard",
@@ -7,5 +9,33 @@ st.set_page_config(
 )
 
 st.title("Internship & Job Tracking Dashboard")
-st.info("Streamlit app is running successfully with Docker.")
-st.write("Next step: connect this app with PostgreSQL.")
+
+st.markdown("""
+This application helps faculty members manage internship and job opportunities using:
+
+- Streamlit
+- PostgreSQL
+- pgAdmin
+- Docker Compose
+- GitHub
+""")
+
+st.header("Database Status")
+
+is_connected, message = test_connection()
+
+if is_connected:
+    st.success("Database connected successfully.")
+    total_records = get_total_records()
+    st.metric("Total Opportunities", total_records)
+    st.info("PostgreSQL version detected successfully.")
+    st.code(message)
+else:
+    st.error("Database connection failed.")
+    st.code(message)
+
+st.header("Application Guide")
+
+st.write("""
+Use the sidebar pages to add, view, update, delete, upload, export, analyze, and verify job opportunities.
+""")
