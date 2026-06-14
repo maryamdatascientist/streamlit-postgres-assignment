@@ -96,3 +96,42 @@ def insert_opportunity(data):
 
     with engine.begin() as connection:
         connection.execute(query, data)
+
+
+def get_opportunity_by_id(opportunity_id):
+    engine = get_engine()
+    query = text("""
+        SELECT *
+        FROM opportunities
+        WHERE opportunity_id = :opportunity_id;
+    """)
+
+    return pd.read_sql(query, engine, params={"opportunity_id": opportunity_id})
+
+
+def update_opportunity(opportunity_id, data):
+    engine = get_engine()
+    query = text("""
+        UPDATE opportunities
+        SET
+            company_name = :company_name,
+            job_title = :job_title,
+            category = :category,
+            city = :city,
+            country = :country,
+            work_mode = :work_mode,
+            required_skills = :required_skills,
+            salary_min = :salary_min,
+            salary_max = :salary_max,
+            currency = :currency,
+            experience_level = :experience_level,
+            application_deadline = :application_deadline,
+            status = :status,
+            source_link = :source_link
+        WHERE opportunity_id = :opportunity_id;
+    """)
+
+    data["opportunity_id"] = opportunity_id
+
+    with engine.begin() as connection:
+        connection.execute(query, data)
