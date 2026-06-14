@@ -146,3 +146,64 @@ def delete_opportunity(opportunity_id):
 
     with engine.begin() as connection:
         connection.execute(query, {"opportunity_id": opportunity_id})
+
+
+def find_duplicate_opportunities():
+    engine = get_engine()
+    query = """
+        WITH normalized AS (
+            SELECT
+                *,
+                LOWER(TRIM(company_name)) AS n_company_name,
+                LOWER(TRIM(job_title)) AS n_job_title,
+                LOWER(TRIM(COALESCE(city, ''))) AS n_city,
+                LOWER(TRIM(COALESCE(source_link, ''))) AS n_source_link
+            FROM opportunities
+        ),
+        duplicate_keys AS (
+            SELECT
+                n_company_name,
+                n_job_title,
+                n_city,
+                n_source_link,
+                COUNT(*) AS duplicate_count
+            FROM normalized
+            GROUP BY
+                n_company_name,
+                n_job_title,
+                n_city,
+                n_source_link
+            HAVING COUNT(*) > 1
+        )
+        SELECT
+            n.opportunity_id,
+            n.company_name,
+            n.job_title,
+            n.category,
+            n.city,
+            n.country,
+            n.work_mode,
+            n.required_skills,
+            n.salary_min,
+            n.salary_max,
+            n.currency,
+            n.experience_level,
+            n.application_deadline,
+            n.status,
+            n.source_link,
+            d.duplicate_count,
+            n.created_at
+        FROM normalized n
+        INNER JOIN duplicate_keys d
+            ON n.n_company_name = d.n_company_name
+           AND n.n_job_title = d.n_job_title
+           AND n.n_city = d.n_city
+           AND n.n_source_link = d.n_source_link
+        ORDER BY
+            n.company_name,
+            n.job_title,
+            n.city,
+            n.source_link,
+            n.opportunity_id;
+    """
+    return pd.read_sql(query, engine)
