@@ -1,3 +1,4 @@
+from auth import require_admin
 import streamlit as st
 from queries import fetch_all_opportunities, get_opportunity_by_id, update_opportunity
 
@@ -6,6 +7,9 @@ st.set_page_config(
     page_icon="✏️",
     layout="wide"
 )
+
+require_admin()
+
 
 st.title("Update Opportunity")
 

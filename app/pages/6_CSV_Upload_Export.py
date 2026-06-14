@@ -1,3 +1,4 @@
+from auth import require_admin
 import streamlit as st
 import pandas as pd
 from queries import fetch_all_opportunities, insert_opportunity, check_duplicate
@@ -7,6 +8,9 @@ st.set_page_config(
     page_icon="📁",
     layout="wide"
 )
+
+require_admin()
+
 
 st.title("CSV Upload / Bulk Insert and Export")
 

@@ -1,3 +1,4 @@
+from auth import require_login
 import streamlit as st
 from queries import fetch_all_opportunities
 
@@ -6,6 +7,9 @@ st.set_page_config(
     page_icon="🔍",
     layout="wide"
 )
+
+require_login()
+
 
 st.title("View and Search Opportunities")
 

@@ -1,3 +1,4 @@
+from auth import require_login
 import streamlit as st
 import pandas as pd
 from sqlalchemy import text
@@ -8,6 +9,9 @@ st.set_page_config(
     page_icon="🩺",
     layout="wide"
 )
+
+require_login()
+
 
 st.title("Database Health Check")
 

@@ -1,3 +1,4 @@
+from auth import require_admin
 import streamlit as st
 from queries import insert_opportunity, check_duplicate
 
@@ -6,6 +7,9 @@ st.set_page_config(
     page_icon="➕",
     layout="wide"
 )
+
+require_admin()
+
 
 st.title("Add New Opportunity")
 

@@ -1,4 +1,5 @@
 import streamlit as st
+from auth import login_widget
 from db import test_connection
 from queries import get_total_records
 
@@ -7,6 +8,8 @@ st.set_page_config(
     page_icon="💼",
     layout="wide"
 )
+
+login_widget()
 
 st.title("Internship & Job Tracking Dashboard")
 
@@ -19,6 +22,18 @@ This application helps faculty members manage internship and job opportunities u
 - Docker Compose
 - GitHub
 """)
+
+st.header("Login Credentials")
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.subheader("Admin")
+    st.code("Username: admin\nPassword: admin123")
+
+with col2:
+    st.subheader("Viewer")
+    st.code("Username: viewer\nPassword: viewer123")
 
 st.header("Database Status")
 
