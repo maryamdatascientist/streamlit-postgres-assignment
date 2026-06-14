@@ -12,6 +12,8 @@ Repository Link:
 
 ```text
 https://github.com/maryamdatascientist/streamlit-postgres-assignment
+https://github.com/Aniqa-r/streamlit-postgres-assignment
+https://github.com/fatima-5671/streamlit-postgres-assignment.git 
 ```
 
 ---
@@ -510,8 +512,8 @@ Add login system and role based access control
 | Member Name    | GitHub Username     | Contribution                                                                                                                                                          |
 | -------------- | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Maryam         | maryamdatascientist |  setup, Docker Compose, PostgreSQL schema, seed data, pages        |
-| Fatima         | Aniqa-r             |  CRUD, dashboard, CSV, duplicate detection, deadline alerts,       |
-| Syeda Aniqa    | TODO                |  seed data, Streamlit pages, login system, documentation           |
+| Fatima         | fatima-5671         |  CRUD, dashboard, CSV, duplicate detection, deadline alerts,       |
+| Syeda Aniqa    | Aniqa-r             |  seed data, Streamlit pages, login system, documentation           |
 
 ---
 
