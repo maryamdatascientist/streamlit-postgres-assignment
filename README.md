@@ -509,11 +509,9 @@ Add login system and role based access control
 
 | Member Name    | GitHub Username     | Contribution                                                                                                                                                          |
 | -------------- | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Maryam         | maryamdatascientist | Project setup, Docker Compose, PostgreSQL schema, seed data, Streamlit pages, CRUD, dashboard, CSV, duplicate detection, deadline alerts, login system, documentation |
-| Group Member 2 | TODO                | TODO                                                                                                                                                                  |
-| Group Member 3 | TODO                | TODO                                                                                                                                                                  |
-
-Note: Update this table according to actual group members before final submission.
+| Maryam         | maryamdatascientist |  setup, Docker Compose, PostgreSQL schema, seed data, pages        |
+| Fatima         | TODO                |  CRUD, dashboard, CSV, duplicate detection, deadline alerts,       |
+| Syeda Aniqa    | TODO                |  seed data, Streamlit pages, login system, documentation           |
 
 ---
 
